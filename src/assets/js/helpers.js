@@ -1,4 +1,3 @@
-let bitcoin = require('bitcoinjs-lib')
 
 export function getExchangeRate (currency) {
   return new Promise(resolve => {
@@ -13,7 +12,7 @@ export function getExchangeRate (currency) {
     //       console.log(`error: ${e}`);
     //     });
     // } else { // end
-    ajax(`https://api.get-spark.com/${currency}`)
+    ajax(`https://api.nimizuela.org/${currency}`)
       .then(function (result) {
         console.log(`exchange rate: ${result[currency]}`)
         resolve(parseFloat(result[currency]))
@@ -27,17 +26,7 @@ export function getExchangeRate (currency) {
 
 export function getAddress (account) {
   return new Promise(resolve => {
-    if (account.startsWith('xpub') || account.startsWith('tpub')) {
-      // get current address index
-      let index = localStorage.getItem('index')
-      let root = bitcoin.bip32.fromBase58(account)
-      let key = root.derivePath(`0/${index}`)
-      let address = bitcoin.payments.p2pkh({ pubkey: key.publicKey, network: { pubKeyHash: 0x4c } }) // 0x4c DASH pubKeyHash
-      // return address at current index
-      resolve(address.address)
-    } else {
-      resolve(account)
-    }
+    resolve(account)
   })
 }
 

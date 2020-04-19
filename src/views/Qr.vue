@@ -12,7 +12,7 @@
       <qrcode v-show="qr" @click.native="test()" :value="uri" :options="{ size: 256, backgroundAlpha: 0, foregroundAlpha: 0.8, level: 'H', padding: 15 }" :tag="'img'"></qrcode>
       <div v-show="!qr" id="cointext" @click="test()">
         <div id="content">
-          <img id="cointext-logo" src='../assets/img/dashtext.png'>
+          <img id="cointext-logo" src='../assets/img/nimiqtext.png'>
           <p id="invoice">{{ this.invoice }}</p>
         </div>
       </div>
@@ -51,8 +51,8 @@ export default {
       uri: '',
       invoice: '',
       price: {
-        mdash: '0',
-        dash: '0'
+        luna: '0',
+        nimiq: '0'
       },
       tx: {
         received: 0,
@@ -82,60 +82,60 @@ export default {
       // bind 'this' for use inside the function
       let vm = this
       // check each address in vout
-      data.vout.forEach(function (output) {
-        let address = Object.keys(output)
-        let amount = Object.values(output)
-        // if address matches the address we have in settings
-        if (address[0] === vm.address) {
-          // set amount received and instantsend status
-          vm.tx.received = vm.tx.received + (amount[0] / 100000000)
-          vm.tx.locked = data.txlock
-          let status = vm.tx.locked
-          let duffs = Math.round(parseFloat(vm.price.dash) * 100000000)
-          // we figure out if the cointext screen is showing when we receive funds - for analytics
-          let method = vm.qr ? 'qr' : 'cointext'
-          console.log(`incoming: ${vm.tx.received} to ${address[0]}`)
-          console.log(`instantsend: ${vm.tx.locked}`)
-          // if the amount is what we're looking for (or more), show confirmed screen
-          if (vm.tx.received >= parseFloat(vm.price.dash)) {
-            // customer completes transaction - we send value, IS status, local currency, qr or cointext - for analytics
-            if (vm.$route.query.address) {
-              router.replace(`/sale/confirmed/${status}?platform=web`)
-              window.dataLayer.push({
-                event: 'GAEvent',
-                eventCategory: 'Web Transaction',
-                eventAction: 'Completed',
-                eventLabel: `${vm.address},${data.txid},${status},${vm.$root.$data.settings.currency},${method}`,
-                eventValue: duffs
-              })
-            } else {
-              router.replace(`/sale/confirmed/${status}`)
-              window.dataLayer.push({
-                event: 'GAEvent',
-                eventCategory: 'POS Transaction',
-                eventAction: 'Completed',
-                eventLabel: `${vm.address},${data.txid},${status},${vm.$root.$data.settings.currency},${method}`,
-                eventValue: duffs
-              })
-            }
+      let address = data.recipient
+      let amount = data.value
+      // if address matches the address we have in settings
+      console.log('!!!', data, data.recipient, vm.address)
+      if (address === vm.address) {
+        // set amount received and instantsend status
+        vm.tx.received = vm.tx.received + (amount / 100000)
+        vm.tx.locked = false // data.txlock
+        let status = vm.tx.locked
+        let duffs = Math.round(parseFloat(vm.price.nimiq) * 100000)
+        // we figure out if the cointext screen is showing when we receive funds - for analytics
+        let method = vm.qr ? 'qr' : 'cointext'
+        console.log(`incoming: ${vm.tx.received} to ${address}`)
+        // console.log(`instantsend: ${vm.tx.locked}`)
+        // if the amount is what we're looking for (or more), show confirmed screen
+        if (vm.tx.received >= parseFloat(vm.price.nimiq)) {
+          // customer completes transaction - we send value, IS status, local currency, qr or cointext - for analytics
+          if (vm.$route.query.address) {
+            router.replace(`/sale/confirmed/${status}?platform=web`)
+            window.dataLayer.push({
+              event: 'GAEvent',
+              eventCategory: 'Web Transaction',
+              eventAction: 'Completed',
+              eventLabel: `${vm.address},${data.txid},${status},${vm.$root.$data.settings.currency},${method}`,
+              eventValue: duffs
+            })
           } else {
-            let remaining = parseFloat(vm.price.dash) - vm.tx.received
-            vm.uri = `dash:${vm.address}?amount=${remaining}&is=1`
-            // TODO: change price, debate over remaining vs received
+            router.replace(`/sale/confirmed/${status}`)
+            window.dataLayer.push({
+              event: 'GAEvent',
+              eventCategory: 'POS Transaction',
+              eventAction: 'Completed',
+              eventLabel: `${vm.address},${data.txid},${status},${vm.$root.$data.settings.currency},${method}`,
+              eventValue: duffs
+            })
           }
+        } else {
+          let remaining = parseFloat(vm.price.nimiq) - vm.tx.received
+          // https://safe.nimiq.com/#_request/NQAABBBBCCCCDDDDEEEEFFFFGGGGHHHHIIII/123.12345_
+          vm.uri = `https://safe.nimiq.com/#_request/${vm.address.replace(/ /g, '')}/${remaining}_`
+          // TODO: change price, debate over remaining vs received
         }
-      })
+      }
     }
   },
 
   computed: {
-    // returns price in dash or mdash based on settings
+    // returns price in nimiq or luna based on settings
     unitPrice: function () {
-      return this.$root.$data.settings.format === 'mdash' ? this.price.mdash : this.price.dash
+      return this.$root.$data.settings.format === 'luna' ? this.price.luna : this.price.nimiq
     },
     // shows merchant amount received (usually only seen for partial payments)
     partial: function () {
-      return this.$root.$data.settings.format === 'dash' ? parseFloat(this.tx.received).toFixed(8) : (this.tx.received * 1000000).toFixed(2)
+      return this.$root.$data.settings.format === 'nimiq' ? parseFloat(this.tx.received).toFixed(5) : (this.tx.received * 100000).toFixed(0)
     }
   },
 
@@ -146,15 +146,16 @@ export default {
     // set the amount
     this.amount = this.$route.params.amount
     // get current price
-    this.price.dash = `${(parseFloat(this.amount) / parseFloat(await spark.getExchangeRate(this.amount.split(' ')[1]))).toFixed(8)} DASH`
-    // set pice in mdash
-    this.price.mdash = `${(parseFloat(this.price.dash) * 1000).toFixed(5)} mDash`
+    this.price.nimiq = `${(parseFloat(this.amount) / parseFloat(await spark.getExchangeRate(this.amount.split(' ')[1]))).toFixed(5)} NIMIQ`
+    // set pice in luna
+    this.price.luna = `${(parseFloat(this.price.nimiq) * 100000).toFixed(0)} LUNA`
     // get address
     this.address = this.$route.query.address || await spark.getAddress(this.$root.$data.settings.account)
     // set uri for qr code
-    this.uri = `dash:${this.address}?amount=${parseFloat(this.price.dash)}&is=1`
-    // set dash amount in duffs
-    let duffs = Math.round(parseFloat(this.price.dash) * 100000000)
+    // https://safe.nimiq.com/#_request/NQAABBBBCCCCDDDDEEEEFFFFGGGGHHHHIIII/123.12345_
+    this.uri = `https://safe.nimiq.com/#_request/${this.address.replace(/ /g, '')}/${parseFloat(this.price.nimiq)}_`
+    // set nimiq amount in duffs
+    let duffs = Math.round(parseFloat(this.price.nimiq) * 100000)
     // push data to analytics
     // window.dataLayer.push({
     //   event: 'GAEvent',
@@ -163,9 +164,9 @@ export default {
     //   eventLabel: this.address,
     //   eventValue: duffs
     // })
-    // set url for cointext or dashtext
-    // let url = `https://api.get-spark.com/invoice?addr=${this.address}&amount=${duffs}`
-    let url = `https://api.get-spark.com/dashtext?addr=${this.address}&amount=${duffs}`
+    // set url for cointext or nimiqtext
+    // let url = `https://api.nimizuela.org/invoice?addr=${this.address}&amount=${duffs}`
+    let url = `https://api.nimizuela.org/nimiqtext?addr=${this.address}&amount=${duffs}`
     // get invoice number from cointext
     console.log(url)
     let vm = this

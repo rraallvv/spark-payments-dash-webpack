@@ -127,8 +127,8 @@
     </select>
     <p>{{ language.format }}</p>
     <select v-model="format">
-        <option value="dash">DASH</option>
-        <option value="mdash">mDash</option>
+        <option value="nimiq">NIMIQ</option>
+        <option value="luna">LUNA</option>
     </select>
     <button @click.prevent="save" class="regular">{{ language.save }}</button>
   </form>
@@ -136,7 +136,7 @@
 </template>
 
 <script>
-import { validate } from 'wallet-address-validator'
+import { validate } from 'public-address-validator'
 import swal from 'sweetalert'
 import router from '../router'
 import translations from './../assets/lang.json'
@@ -209,8 +209,8 @@ export default {
     // when the camera decodes a QR code, it runs this function
     onDecode: function (data) {
       let acct = data
-      // if address starts with 'dash:' we remove it
-      if (acct.startsWith('dash:')) {
+      // if address starts with 'nimiq:' we remove it
+      if (acct.startsWith('nimiq:')) {
         acct = acct.split(':')[1]
       }
       if (data.includes('?')) {
@@ -239,34 +239,19 @@ export default {
       let acct = this.$root.$data.settings.account
       const pw = this.$root.$data.settings.password
       const storedPw = localStorage.getItem('password')
-      // if address starts with 'dash:' we remove it
-      if (acct.startsWith('dash:')) {
+      // if address starts with 'nimiq:' we remove it
+      if (acct.startsWith('nimiq:')) {
         this.$root.$data.settings.account = acct.split(':')[1]
         acct = this.$root.$data.settings.account
       }
       // validating the address form input
-      if (acct.startsWith('y')) {
-        if (!validate(acct, 'dash', 'testnet')) {
-          swal('Error!', this.language.errors.address, 'error')
-          console.log('not valid')
-          return
-        }
-        swal('Warning!', this.language.errors.warning, 'error')
-      } else if (acct.startsWith('X')) {
-        if (!validate(acct, 'dash')) {
-          swal('Error!', this.language.errors.address, 'error')
-          console.log('not valid')
-          return
-        }
-      } else if (acct.startsWith('xpub')) {
-        this.$root.$data.settings.account = acct.split('?')[0]
-        acct = this.$root.$data.settings.account
-        console.log('xpub, nice dude.')
-      } else {
+      if (!validate(acct, 'nimiq')) {
         swal('Error!', this.language.errors.address, 'error')
         console.log('not valid')
         return
       }
+      acct = acct.toUpperCase().replace(/ /g, '').replace(/(.{4})/g, '$1 ').trim()
+      this.$root.$data.settings.account = acct
       // making sure there is a password
       if ((pw.length < 8 && storedPw === null) || (pw.length > 0 && pw.length < 8)) {
         swal('Error!', this.language.errors.password, 'error')

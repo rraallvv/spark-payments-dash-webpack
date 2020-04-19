@@ -1,9 +1,9 @@
 # Spark Payments (Web and Mobile)
-Spark Payments is a mobile-friendly payment terminal app for web and mobile that merchants can use to accept Dash payments.
+Spark Payments is a mobile-friendly payment terminal app for web and mobile that merchants can use to accept Nimiq payments.
 
 ## Current Features
 
-* Enter sale amounts in your local currency (supports 94 currencies) and have them converted to an amount in Dash
+* Enter sale amounts in your local currency (supports 94 currencies) and have them converted to an amount in Nimiq
 * A QR code payment request is generated
 * Get an on-screen notification when the requested amount is received at your address (or partial)
 * Detects if transactions were sent with InstantSend (or not)
@@ -16,7 +16,7 @@ Spark Payments is a mobile-friendly payment terminal app for web and mobile that
 
 ``` bash
 # clone repository
-git clone https://github.com/SparkPayments/spark-payments-dash-webpack.git spark
+git clone https://github.com/rraallvv/spark-payments-nimiq-webpack.git spark
 
 # change directories
 cd spark

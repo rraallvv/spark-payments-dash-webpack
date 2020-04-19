@@ -4,8 +4,8 @@
         <param name="browser-package" value="Device" />
     </feature>
     <name>Spark Payments</name>
-    <description>An external terminal for processing DASH transactions in brick and mortar stores</description>
-    <author email="kodaxx@gmail.com" href="http://kodaxx.github.io">kodaxx</author>
+    <description>An external terminal for processing NIMIQ transactions in brick and mortar stores</description>
+    <author email="rhodylugo@gmail.com" href="http://rraallvv.github.io">rraallvv</author>
     <content src="index.html" />
     <icon src="icon.png" />
     <access origin="*" />
