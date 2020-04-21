@@ -115,6 +115,15 @@ const webpackConfig = merge(baseWebpackConfig, {
         to: config.build.assetsSubDirectory,
         ignore: ['.*']
       }
+    ]),
+
+    // copy PWA assets
+    new CopyWebpackPlugin([
+      {
+        from: path.resolve(__dirname, '../src/assets'),
+        to: config.build.pwaAssetsSubDirectory,
+        ignore: ['lang.json', 'kaching.mp3', 'fonts/**/*', 'img/**/*', 'js/**/*']
+      }
     ])
   ]
 })

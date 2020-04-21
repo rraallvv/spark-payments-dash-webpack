@@ -85,7 +85,6 @@ export default {
       let address = data.recipient
       let amount = data.value
       // if address matches the address we have in settings
-      console.log('!!!', data, data.recipient, vm.address)
       if (address === vm.address) {
         // set amount received and instantsend status
         vm.tx.received = vm.tx.received + (amount / 100000)

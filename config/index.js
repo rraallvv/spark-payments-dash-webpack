@@ -50,6 +50,7 @@ module.exports = {
     // Paths
     assetsRoot: path.resolve(__dirname, '../dist'),
     assetsSubDirectory: 'static',
+    pwaAssetsSubDirectory: 'assets',
     assetsPublicPath: '/',
 
     /**
@@ -76,13 +77,13 @@ module.exports = {
 
   mobile: {
     env: require('./mobile.env'),
-	   index: path.resolve(__dirname, '../mobile/www/index.html'),
-	   assetsRoot: path.resolve(__dirname, '../mobile/www'),
-	   assetsSubDirectory: 'static',
-     assetsPublicPath: './',
-     productionSourceMap: false,
-     productionGzip: false,
-     productionGzipExtensions: ['js', 'css'],
-     bundleAnalyzerReport: process.env.npm_config_report,
-   }
+    index: path.resolve(__dirname, '../mobile/www/index.html'),
+    assetsRoot: path.resolve(__dirname, '../mobile/www'),
+    assetsSubDirectory: 'static',
+    assetsPublicPath: './',
+    productionSourceMap: false,
+    productionGzip: false,
+    productionGzipExtensions: ['js', 'css'],
+    bundleAnalyzerReport: process.env.npm_config_report,
+  }
 }
