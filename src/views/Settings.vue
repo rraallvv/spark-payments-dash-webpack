@@ -184,6 +184,9 @@ export default {
       set (value) {
         this.$root.$data.settings.language = value
         this.language = translations[this.$root.$data.settings.language]
+        if (this.language !== '') {
+          !localStorage.getItem('password') ? this.pw = this.language.errors.create : this.pw = this.language.errors.reset
+        }
       }
     },
 
@@ -275,10 +278,7 @@ export default {
   },
 
   mounted () {
-    this.language = translations[this.$root.$data.settings.language]
-    if (this.language !== '') {
-      !localStorage.getItem('password') ? this.pw = this.language.errors.create : this.pw = this.language.errors.reset
-    }
+    this.languages = this.$root.$data.settings.language
   }
 }
 </script>
