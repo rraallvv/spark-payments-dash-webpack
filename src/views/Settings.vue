@@ -183,6 +183,7 @@ export default {
       },
       set (value) {
         this.$root.$data.settings.language = value
+        this.language = translations[this.$root.$data.settings.language]
       }
     },
 
