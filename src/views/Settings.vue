@@ -7,7 +7,7 @@
   <form v-if="!camera" autocomplete='off'>
     <p>{{ language.address }}</p>
     <div id="wrap">
-      <input id="address" v-model='address' type='text' class='input settings' value=''>
+      <input id="address" v-model='address' type='text' class='input settings' value='' placeholder='NQ'>
       <button id="scan" @click.prevent="camera = true">[-]</button>
     </div>
     <!-- <input v-model='address' type='text' class='input settings' value=''> -->
