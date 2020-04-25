@@ -128,8 +128,8 @@
     </select>
     <p>{{ language.format }}</p>
     <select v-model="format">
-        <option value="nimiq">NIMIQ</option>
-        <option value="luna">LUNA</option>
+        <option value="nimiq">NIMIQ (NIM)</option>
+        <option value="luna">LUNA (10 µNIM)</option>
     </select>
     <button @click.prevent="save" class="regular">{{ language.save }}</button>
   </form>
