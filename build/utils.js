@@ -82,6 +82,17 @@ exports.styleLoaders = function (options) {
   return output
 }
 
+// Generate loaders for Javascript files with unsoported syntax
+exports.jsLoaders = function () {  
+  return [{
+    test: /\.js$/,
+    include: /node_modules\/@nimiq\/hub-api/,
+    use: {
+      loader: 'babel-loader'
+    }
+  }]
+}
+
 exports.createNotifierCallback = () => {
   const notifier = require('node-notifier')
 

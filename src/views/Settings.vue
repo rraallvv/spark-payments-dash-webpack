@@ -8,7 +8,8 @@
     <p>{{ language.address }}</p>
     <div id="wrap">
       <input id="address" v-model='address' type='text' class='input settings' value='' placeholder='NQ'>
-      <button id="scan" @click.prevent="camera = true">[-]</button>
+      <button id="scan" @click.prevent="camera = true"><img src='../assets/img/qr-scanner.svg'></button>
+      <button id="wallet" @click.prevent="wallet()"><img src='../assets/img/wallet.svg'></button>
     </div>
     <!-- <input v-model='address' type='text' class='input settings' value=''> -->
     <p>{{ language.password }}</p>
@@ -140,6 +141,7 @@ import { validate } from 'public-address-validator'
 import swal from 'sweetalert'
 import router from '../router'
 import translations from './../assets/lang.json'
+import HubApi from '@nimiq/hub-api'
 import Vue from 'vue'
 import VueQrcodeReader from 'vue-qrcode-reader'
 
@@ -224,6 +226,11 @@ export default {
       this.camera = false
       console.log(data)
     },
+    wallet: async function () {
+      const hubApi = new HubApi('https://hub.nimiq-testnet.com')
+      const addressInfo = await hubApi.chooseAddress({appName: 'Spark'})
+      this.address = addressInfo.address
+    },
     // if there's no password our placeholder says 'create'
     reset: function () {
       // console.log('reset function ran')
@@ -291,18 +298,31 @@ export default {
   }
 
   #address {
-    padding-right: 12%;
-    width: 70%
+    padding-right: 18%;
+    width: 65%
   }
 
   #scan {
     position: absolute;
-    top: 19px;
-    right: 9.5%;
+    top: 13px;
+    right: 14%;
     font-size: 1.2em;
     margin: 0;
-    width: 35px;
-    height: 30px;
+    width: 40px;
+    height: 40px;
+    border: none;
+    background: none;
+    color: grey;
+  }
+
+  #wallet {
+    position: absolute;
+    top: 13px;
+    right: 6.5%;
+    font-size: 1.2em;
+    margin: 0;
+    width: 40px;
+    height: 40px;
     border: none;
     background: none;
     color: grey;
