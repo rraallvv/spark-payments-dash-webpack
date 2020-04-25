@@ -227,7 +227,7 @@ export default {
       console.log(data)
     },
     wallet: async function () {
-      const hubApi = new HubApi('https://hub.nimiq-testnet.com')
+      const hubApi = new HubApi(this.$hubUrl)
       const addressInfo = await hubApi.chooseAddress({appName: 'Spark'})
       this.address = addressInfo.address
     },

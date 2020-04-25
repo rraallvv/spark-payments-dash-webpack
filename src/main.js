@@ -4,10 +4,17 @@ import router from './router'
 import socketio from 'socket.io-client'
 import VueSocketIO from 'vue-socket.io'
 
-Vue.prototype.$env = 'testnet'
+const env = 'testnet'
+
+// mainnet: https://safe.nimiq.com - testnet: https://safe.nimiq-testnet.com
+Vue.prototype.$safeUrl = env === 'mainnet' ? 'https://safe.nimiq.com' : 'https://safe.nimiq-testnet.com'
+
+// mainnet: https://hub.nimiq.com - testnet: https://hub.nimiq-testnet.com
+Vue.prototype.$hubUrl = env === 'mainnet' ? 'https://hub.nimiq.com' : 'https://hub.nimiq-testnet.com'
 
 // mainnet: https://insight.nimizuela.org:443 - testnet: https://testnet-insight.nimizuela.org:443
-export const url = Vue.prototype.$env === 'mainnet' ? socketio('https://insight.nimizuela.org:443') : socketio('https://testnet-insight.nimizuela.org:443')
+export const url = env === 'mainnet' ? socketio('https://insight.nimizuela.org:443') : socketio('https://testnet-insight.nimizuela.org:443')
+
 Vue.use(VueSocketIO, url)
 
 Vue.config.productionTip = false

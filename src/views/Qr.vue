@@ -25,7 +25,6 @@
 </template>
 
 <script>
-import Vue from 'vue'
 import * as spark from './../assets/js/helpers'
 import axios from 'axios'
 import VueQrcode from '@xkeshi/vue-qrcode'
@@ -120,9 +119,8 @@ export default {
           }
         } else {
           let remaining = parseFloat(vm.price.nimiq) - vm.tx.received
-          // mainnet: https://safe.nimiq.com/#_request/NQAABBBBCCCCDDDDEEEEFFFFGGGGHHHHIIII/123.12345_
-          // testnet: https://safe.nimiq-testnet.com/#_request/NQAABBBBCCCCDDDDEEEEFFFFGGGGHHHHIIII/123.12345_
-          vm.uri = `https://safe.nimiq${Vue.prototype.$env === 'mainnet' ? '' : '-testnet'}.com/#_request/${vm.address.replace(/ /g, '')}/${remaining}_`
+          // safeUrl/#_request/NQAABBBBCCCCDDDDEEEEFFFFGGGGHHHHIIII/123.12345_
+          vm.uri = `${this.$safeUrl}/#_request/${vm.address.replace(/ /g, '')}/${remaining}_`
           // TODO: change price, debate over remaining vs received
         }
       }
@@ -153,9 +151,8 @@ export default {
     // get address
     this.address = this.$route.query.address || await spark.getAddress(this.$root.$data.settings.account)
     // set uri for qr code
-    // mainnet: https://safe.nimiq.com/#_request/NQAABBBBCCCCDDDDEEEEFFFFGGGGHHHHIIII/123.12345_
-    // testnet: https://safe.nimiq-testnet.com/#_request/NQAABBBBCCCCDDDDEEEEFFFFGGGGHHHHIIII/123.12345_
-    this.uri = `https://safe.nimiq${Vue.prototype.$env === 'mainnet' ? '' : '-testnet'}.com/#_request/${this.address.replace(/ /g, '')}/${parseFloat(this.price.nimiq)}_`
+    // safeUrl/#_request/NQAABBBBCCCCDDDDEEEEFFFFGGGGHHHHIIII/123.12345_
+    this.uri = `${this.$safeUrl}/#_request/${this.address.replace(/ /g, '')}/${parseFloat(this.price.nimiq)}_`
     // set nimiq amount in duffs
     let duffs = Math.round(parseFloat(this.price.nimiq) * 100000)
     // push data to analytics
