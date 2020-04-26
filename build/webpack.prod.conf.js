@@ -15,14 +15,11 @@ const env = require('../config/prod.env')
 
 const webpackConfig = merge(baseWebpackConfig, {
   module: {
-    rules: [
-      ...utils.jsLoaders(),
-      ...utils.styleLoaders({
-        sourceMap: config.build.productionSourceMap,
-        extract: true,
-        usePostCSS: true
-	  })
-	]
+    rules: utils.styleLoaders({
+      sourceMap: config.build.productionSourceMap,
+      extract: true,
+      usePostCSS: true
+	})
   },
   devtool: config.build.productionSourceMap ? config.build.devtool : false,
   output: {
@@ -117,15 +114,6 @@ const webpackConfig = merge(baseWebpackConfig, {
         from: path.resolve(__dirname, '../static'),
         to: config.build.assetsSubDirectory,
         ignore: ['.*']
-      }
-    ]),
-
-    // copy PWA assets
-    new CopyWebpackPlugin([
-      {
-        from: path.resolve(__dirname, '../src/assets'),
-        to: config.build.pwaAssetsSubDirectory,
-        ignore: ['lang.json', 'kaching.mp3', 'fonts/**/*', 'img/**/*', 'js/**/*']
       }
     ])
   ]

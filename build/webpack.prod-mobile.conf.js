@@ -15,14 +15,11 @@ const env = require('../config/prod.env')
 
 const webpackConfig = merge(baseWebpackConfig, {
   module: {
-    rules: [
-	  ...utils.jsLoaders(),
-      ...utils.styleLoaders({
-        sourceMap: config.mobile.productionSourceMap,
-        extract: true,
-        usePostCSS: true
-	  })
-	]
+    rules: utils.styleLoaders({
+      sourceMap: config.mobile.productionSourceMap,
+      extract: true,
+      usePostCSS: true
+	})
   },
   devtool: config.mobile.productionSourceMap ? config.mobile.devtool : false,
   output: {
