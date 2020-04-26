@@ -242,6 +242,7 @@ export default {
       }
       this.address = acct
       this.camera = false
+      this.guides = false
       console.log(data)
     },
     wallet: async function () {
