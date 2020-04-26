@@ -1,8 +1,17 @@
 <template>
   <div>
     <div v-if="camera">
-      <qrcode-reader @decode="onDecode"></qrcode-reader>
-      <button style="background: var(--red); border: 1px solid var(--red);" @click="camera = false">{{ language.cancel }}</button>
+      <qrcode-reader @decode="onDecode" @init="onInit">
+        <div class='guides-wrapper' v-if="guides">
+          <div class='guides-area'>
+            <div class='guidetl'></div>
+            <div class='guidetr'></div>
+            <div class='guidebl'></div>
+            <div class='guidebr'></div>
+          </div>
+        </div>
+      </qrcode-reader>
+      <button style="background: var(--red); border: 1px solid var(--red);" @click="camera = false; guides = false">{{ language.cancel }}</button>
     </div>
   <form v-if="!camera" autocomplete='off'>
     <p>{{ language.address }}</p>
@@ -156,7 +165,8 @@ export default {
     return {
       language: '',
       pw: '',
-      camera: false
+      camera: false,
+      guides: false
     }
   },
 
@@ -212,6 +222,14 @@ export default {
 
   },
   methods: {
+    // when the camera inits runs this function
+    onInit: function (promise) {
+      promise.then(_ => {
+        this.guides = true
+      }).catch(error => {
+        console.log(error)
+      })
+    },
     // when the camera decodes a QR code, it runs this function
     onDecode: function (data) {
       let acct = data
@@ -372,5 +390,59 @@ export default {
 
   button:active {
     transform: scale(0.9);
+  }
+
+  .guidetl {
+    position: absolute;
+    width: 10%;
+    height: 10%;
+    background-image: url('../assets/img/qr-guide.png');
+    background-size: contain;
+  }
+
+  .guidetr {
+    position: absolute;
+    right: 0;
+    width: 10%;
+    height: 10%;
+    background-image: url('../assets/img/qr-guide.png');
+    background-size: contain;
+    transform: scaleX(-1);
+  }
+
+  .guidebl {
+    position: absolute;
+    bottom: 0;
+    width: 10%;
+    height: 10%;
+    background-image: url('../assets/img/qr-guide.png');
+    background-size: contain;
+    transform: scaleY(-1);
+  }
+
+  .guidebr {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 10%;
+    height: 10%;
+    background-image: url('../assets/img/qr-guide.png');
+    background-size: contain;
+    transform: scale(-1, -1);
+  }
+
+  .guides-area {
+    position: absolute;
+    width: 50%;
+    padding-bottom: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .guides-wrapper     {
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
   }
 </style>
