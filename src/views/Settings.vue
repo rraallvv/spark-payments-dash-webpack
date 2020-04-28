@@ -22,7 +22,10 @@
     </div>
     <!-- <input v-model='address' type='text' class='input settings' value=''> -->
     <p>{{ language.password }}</p>
-    <input v-model='password' type='password' class='input settings' value ='' :placeholder='pw'>
+    <div id="wrap">
+      <input id="password" v-model='password' :type='passwordFieldType' class='input settings' value ='' :placeholder='pw'>
+      <button id="show-password" @click.prevent="togglePasswordFieldType()"><div :class='passwordFieldType === "password" ? "pw-visible" : "pw-hidden"'/></button>
+    </div>
     <p>{{ language.language }}</p>
     <select v-model="languages">
         <option value="ar">العربية</option>
@@ -166,7 +169,8 @@ export default {
       language: '',
       pw: '',
       camera: false,
-      guides: false
+      guides: false,
+      passwordFieldType: 'password'
     }
   },
 
@@ -182,7 +186,7 @@ export default {
 
     password: {
       get () {
-        return ''
+        return this.$root.$data.settings.password
       },
       set (value) {
         this.$root.$data.settings.password = value
@@ -245,10 +249,14 @@ export default {
       this.guides = false
       console.log(data)
     },
-    wallet: async function () {
+    wallet: function () {
       const hubApi = new HubApi(this.$hubUrl)
-      const addressInfo = await hubApi.chooseAddress({appName: 'Spark'})
-      this.address = addressInfo.address
+      hubApi.chooseAddress({appName: 'Spark'}).then(addressInfo => {
+        this.address = addressInfo.address
+      })
+    },
+    togglePasswordFieldType: function () {
+      this.passwordFieldType = this.passwordFieldType === 'password' ? 'text' : 'password'
     },
     // if there's no password our placeholder says 'create'
     reset: function () {
@@ -290,6 +298,7 @@ export default {
       }
       if (pw.length > 7) {
         localStorage.setItem('password', bitcoin.crypto.sha256(this.$root.$data.settings.password).join(''))
+        this.$root.$data.settings.password = ''
       }
       console.log('saved')
       // save settings to localStorage
@@ -335,6 +344,24 @@ export default {
   }
 
   #wallet {
+    position: absolute;
+    top: 13px;
+    right: 6.5%;
+    font-size: 1.2em;
+    margin: 0;
+    width: 40px;
+    height: 40px;
+    border: none;
+    background: none;
+    color: grey;
+  }
+
+  #password {
+    padding-right: 18%;
+    width: 65%
+  }
+
+  #show-password {
     position: absolute;
     top: 13px;
     right: 6.5%;
@@ -445,5 +472,17 @@ export default {
     box-sizing: border-box;
     width: 100%;
     height: 100%;
+  }
+
+  .pw-hidden {
+    background: url("../assets/img/pw-hidden.svg") no-repeat;
+    width: 1em;
+    height: 1em;
+  }
+
+  .pw-visible {
+    background: url("../assets/img/pw-visible.svg") no-repeat;
+    width: 1em;
+    height: 1em;
   }
 </style>
