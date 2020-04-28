@@ -155,7 +155,7 @@ export default {
   src: url('./assets/fonts/barlow.ttf');
 } */
 
-@media (min-width: 500px) {
+@media (min-aspect-ratio: 1/2) {
   #app {
     width: 50vh;
     margin: auto;
