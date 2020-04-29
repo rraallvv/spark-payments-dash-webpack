@@ -181,7 +181,7 @@ export default {
     float: left;
     margin-left: 10%;
     margin-bottom: 0vw;
-    margin-top: 2vw;
+    margin-top: 0.65em;
     color: var(--dark);
   }
   /* dropdown box */

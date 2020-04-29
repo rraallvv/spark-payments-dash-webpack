@@ -160,6 +160,10 @@ export default {
     width: 50vh;
     margin: auto;
   }
+
+  body {
+    font-size: 2.25vh !important;
+  }
 }
 
 :root {
@@ -183,6 +187,7 @@ body {
   padding: 0;
   width: 100%;
   margin: 0 auto;
+  font-size: 4.5vw;
 }
 
 img {

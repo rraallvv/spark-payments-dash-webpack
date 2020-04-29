@@ -17,8 +17,8 @@
     <p>{{ language.address }}</p>
     <div id="wrap">
       <input id="address" v-model='address' type='text' class='input settings' value='' placeholder='NQ'>
-      <button id="scan" @click.prevent="camera = true"><img src='../assets/img/qr-scanner.svg'></button>
-      <button id="wallet" @click.prevent="wallet()"><img src='../assets/img/wallet.svg'></button>
+      <button id="scan" @click.prevent="camera = true"><div class='show-camera'/></button>
+      <button id="wallet" @click.prevent="wallet()"><div class='pick-wallet'/></button>
     </div>
     <!-- <input v-model='address' type='text' class='input settings' value=''> -->
     <p>{{ language.password }}</p>
@@ -332,12 +332,12 @@ export default {
 
   #scan {
     position: absolute;
-    top: 13px;
-    right: 14%;
+    top: 0.92em;
+    right: 3em;
     font-size: 1.2em;
     margin: 0;
-    width: 40px;
-    height: 40px;
+    width: 1.6em;
+    height: 1.6em;
     border: none;
     background: none;
     color: grey;
@@ -345,12 +345,12 @@ export default {
 
   #wallet {
     position: absolute;
-    top: 13px;
-    right: 6.5%;
+    top: 0.92em;
+    right: 1.5em;
     font-size: 1.2em;
     margin: 0;
-    width: 40px;
-    height: 40px;
+    width: 1.6em;
+    height: 1.6em;
     border: none;
     background: none;
     color: grey;
@@ -363,12 +363,12 @@ export default {
 
   #show-password {
     position: absolute;
-    top: 13px;
-    right: 6.5%;
+    top: 0.92em;
+    right: 1.5em;
     font-size: 1.2em;
     margin: 0;
-    width: 40px;
-    height: 40px;
+    width: 1.6em;
+    height: 1.6em;
     border: none;
     background: none;
     color: grey;
@@ -378,7 +378,7 @@ export default {
     float: left;
     margin-left: 10%;
     margin-bottom: 0vw;
-    margin-top: 2vw;
+    margin-top: 0.65em;
     color: var(--dark);
   }
   /* remove outlines from form */
@@ -392,24 +392,24 @@ export default {
     background: var(--background);
     width: 80%;
     border: 1px solid #d5d5d5;
-    border-radius: 10px;
+    border-radius: 0.4em;
     font-size: 1.5em;
-    padding: 10px;
+    padding: 0.4em;
   }
   /* dropdown boxes */
   select {
     width: 85%;
     font-size: 1.5em;
     background: var(--light);
-    margin: 10px;
-    border-radius: 5px;
+    margin: 0.4em;
+    border-radius: 0.2em;
   }
   /* save button */
   button {
     font-size: 180%;
     color: #fff;
     margin: 3vh;
-    border-radius: 10px;
+    border-radius: 0.4em;
     width: 80%;
     height: 10vh;
     border: 1px solid var(--primary);
@@ -482,6 +482,18 @@ export default {
 
   .pw-visible {
     background: url("../assets/img/pw-visible.svg") no-repeat;
+    width: 1em;
+    height: 1em;
+  }
+
+  .pick-wallet {
+    background: url("../assets/img/wallet.svg") no-repeat;
+    width: 1em;
+    height: 1em;
+  }
+
+  .show-camera {
+    background: url("../assets/img/qr-scanner.svg") no-repeat;
     width: 1em;
     height: 1em;
   }
