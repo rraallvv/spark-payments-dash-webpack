@@ -209,7 +209,7 @@ export default {
     margin: 30vh auto;
   }
 
-  @media (min-width: 500px) {
+  @media (min-aspect-ratio: 1/2) {
     #icon {
       margin: 30vh 0 0 19.5vh;
     }
@@ -233,7 +233,7 @@ export default {
     width: 92%;
     text-align: center;
     color: var(--secondary);
-    font-size: 50px;
+    font-size: 3em;
   }
 
   p {
@@ -241,7 +241,7 @@ export default {
     width: 92%;
     text-align: center;
     color: var(--secondary);
-    font-size: 30px;
+    font-size: 1.95em;
   }
 
   #cointext {
@@ -263,11 +263,11 @@ export default {
   }
 
   #cointext-logo {
-    margin-top: 30px;
+    margin-top: 1em;
   }
 
   #invoice {
-    margin-top: 50px;
+    margin-top: 1em;
   }
 
   #price {
@@ -276,16 +276,16 @@ export default {
     text-align: center;
     font-style: italic;
     color: var(--secondary);
-    font-size: 17px;
+    font-size: 1em;
   }
   /* cancel button */
   button {
     font-size: 180%;
     color: #fff;
-    margin: 3vh;
-    border-radius: 10px;
+    margin: 0.75em;
+    border-radius: 0.4em;
     width: 80%;
-    height: 10vh;
+    height: 2.47em;
     border: 1px solid var(--red);
     background: var(--red);
   }

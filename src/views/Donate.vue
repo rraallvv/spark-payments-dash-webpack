@@ -189,8 +189,8 @@ export default {
     width: 80%;
     font-size: 1.5em;
     background: var(--light);
-    margin: 10px;
-    border-radius: 5px;
+    margin: 0.4em;
+    border-radius: 0.2em;
   }
   /* amount display */
   input[type="text"] {
@@ -198,7 +198,7 @@ export default {
     background: var(--background);
     width: 80%;
     border: 1px solid #d5d5d5;
-    border-radius: 10px;
+    border-radius: 0.2em;
     font-size: 3em;
     text-align: center;
   }
@@ -206,10 +206,10 @@ export default {
   button {
     font-size: 180%;
     color: #fff;
-    margin: 3vh;
-    border-radius: 10px;
+    margin: 0.75em;
+    border-radius: 0.4em;
     width: 80%;
-    height: 10vh;
+    height: 2.47em;
     border: 1px solid var(--green);
     background: var(--green);
   }

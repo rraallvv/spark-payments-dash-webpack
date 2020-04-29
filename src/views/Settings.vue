@@ -408,10 +408,10 @@ export default {
   button {
     font-size: 180%;
     color: #fff;
-    margin: 3vh;
+    margin: 0.75em;
     border-radius: 0.4em;
     width: 80%;
-    height: 10vh;
+    height: 2.47em;
     border: 1px solid var(--primary);
     background: var(--primary);
   }

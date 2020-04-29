@@ -72,20 +72,20 @@ export default {
     margin: 1% auto;
     width: 92%;
     text-align: center;
-    font-size: 30px;
+    font-size: 1.85em;
   }
   #lock {
-    width: 23px;
+    width: 0.76em;
     display: inline;
   }
   /* charge button */
   button {
     font-size: 180%;
     color: #fff;
-    margin: 3vh;
-    border-radius: 10px;
+    margin: 0.75em;
+    border-radius: 0.4em;
     width: 80%;
-    height: 10vh;
+    height: 2.47em;
     border: 1px solid var(--primary);
     background: var(--primary);
   }
