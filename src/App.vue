@@ -16,8 +16,6 @@
 <script>
 import translations from './assets/lang.json'
 import router from './router'
-import swal from 'sweetalert'
-let bitcoin = require('bitcoinjs-lib')
 
 export default {
   name: 'App',
@@ -50,31 +48,7 @@ export default {
     },
     // check password and take us to settings page
     settings: async function () {
-      // for backwards compatibility (for now), we only ask for password if password exists
-      if (localStorage.getItem('password') !== null) {
-        let pw = await swal({
-          title: this.language.errors.enter,
-          buttons: [true, 'Ok'],
-          content: {
-            element: 'input',
-            attributes: {
-              type: 'password'
-            }
-          }
-        })
-        pw = bitcoin.crypto.sha256(pw).join('')
-        // if password matches, show settings
-        if (pw === localStorage.getItem('password')) {
-          router.push('/settings')
-          return
-        }
-        // if password doesn't match and one was typed, it's wrong - show user
-        if (pw !== null) {
-          swal('Error!', this.language.errors.wrong, 'error')
-        }
-      } else {
-        router.push('/settings')
-      }
+      router.push('/settings')
     },
 
     cancel: function () {
