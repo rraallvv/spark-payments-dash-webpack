@@ -18,7 +18,7 @@
     <br>
     <input @click="add('0')" type='button' class='number' value='0'>
     <input @click="add('00')" type='button' class='number' value='00'>
-    <input @click="remove()" type='button' class='delete' value='⌫'>
+    <div @click="remove()" class='delete'><div/></div>
     <br>
     <!-- charge button -->
     <button @click.prevent="purchase" class="charge">{{ language.charge }}</button>
@@ -127,14 +127,50 @@ export default {
     color: #fff;
   }
   /* delete button */
-  input[type="button"].delete {
+  div.delete {
     box-shadow: var(--red) 0 0 1px 1px;
+    background: var(--background);
+    color: var(--secondary);
+    border: none;
+    border-radius: 50%;
+    text-align: center;
+    width: 22%;
+    -webkit-appearance: none;
+    margin: 1%;
+    padding: 11% 0;
+    font-size: 230%;
+    line-height: 0;
+    display: inline-block;
+    position: relative;
+    vertical-align: bottom;
   }
 
-  input[type="button"].delete:active {
+  div.delete:active {
     background: var(--red);
     color: #fff;
   }
+
+  div.delete > div {
+    background: var(--secondary);
+    color: #fff;
+    -webkit-mask: url("../assets/img/backspace.svg") no-repeat;
+    mask: url("../assets/img/backspace.svg") no-repeat;
+    width: 1em;
+    height: 1em;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+  }
+
+  div.delete:active > div {
+    background: var(--background);
+    color: var(--secondary);
+  }
+
   /* charge button */
   button {
     font-size: 180%;

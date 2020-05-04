@@ -1,7 +1,7 @@
 <template>
 <div id="app">
-  <span v-if='this.$route.path === "/"' @click="settings()" id="menu">☰</span>
-  <span v-if='this.$route.path === "/settings" && isStored()' @click="cancel()" id="menu">✕</span>
+  <span v-if='this.$route.path === "/"' @click="settings()" id="menu"><div class="hamburger" /></span>
+  <span v-if='this.$route.path === "/settings" && isStored()' @click="cancel()" id="menu"><div class="close" /></span>
   <img class='logo' src='./assets/img/logo.png'>
   <span v-if='connected === true' id="status" class="green">•</span>
   <span v-else id="status" class="red">•</span>
@@ -107,6 +107,22 @@ export default {
   position: absolute;
   top: 10px;
   left: 20px;
+}
+
+.hamburger {
+    -webkit-mask: url("./assets/img/menu.svg") no-repeat;
+    mask: url("./assets/img/menu.svg") no-repeat;
+    width: 1em;
+    height: 1em;
+    background: #b2b2b2;
+}
+
+.close {
+    -webkit-mask: url("./assets/img/close.svg") no-repeat;
+    mask: url("./assets/img/close.svg") no-repeat;
+    width: 1em;
+    height: 1em;
+    background: #b2b2b2;
 }
 
 #status {
