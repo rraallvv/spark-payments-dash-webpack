@@ -396,6 +396,9 @@ export default {
     font-size: 1.5em;
     padding: 0.4em;
   }
+  ::placeholder {
+    color: var(--secondary);
+  }
   /* dropdown boxes */
   select {
     width: 85%;
@@ -475,25 +478,33 @@ export default {
   }
 
   .pw-hidden {
-    background: url("../assets/img/pw-hidden.svg") no-repeat;
+    -webkit-mask: url("../assets/img/pw-hidden.svg") no-repeat;
+    mask: url("../assets/img/pw-hidden.svg") no-repeat;
+    background-color: var(--info);
     width: 1em;
     height: 1em;
   }
 
   .pw-visible {
-    background: url("../assets/img/pw-visible.svg") no-repeat;
+    -webkit-mask: url("../assets/img/pw-visible.svg") no-repeat;
+    mask: url("../assets/img/pw-visible.svg") no-repeat;
+    background-color: var(--info);
     width: 1em;
     height: 1em;
   }
 
   .pick-wallet {
-    background: url("../assets/img/wallet.svg") no-repeat;
+    -webkit-mask: url("../assets/img/wallet.svg") no-repeat;
+    mask: url("../assets/img/wallet.svg") no-repeat;
+    background-color: var(--info);
     width: 1em;
     height: 1em;
   }
 
   .show-camera {
-    background: url("../assets/img/qr-scanner.svg") no-repeat;
+    -webkit-mask: url("../assets/img/qr-scanner.svg") no-repeat;
+    mask: url("../assets/img/qr-scanner.svg") no-repeat;
+    background-color: var(--info);
     width: 1em;
     height: 1em;
   }

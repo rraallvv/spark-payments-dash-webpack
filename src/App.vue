@@ -144,6 +144,7 @@ export default {
   --primary: #0087E8;
   --secondary: #6B6570;
   --background: #ededed;
+  --info: #757575;
   --dark: #282727;
   --light: #fff;
   --red: #f10032;
