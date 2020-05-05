@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="container">
     <half-circle-spinner v-if="!loading" id="spinner" :animation-duration="1000" :size="30" color="var(--primary)" />
     <transition name="fade">
       <div id="loader" :class="loaderClasses" v-show="loading">
@@ -191,12 +191,17 @@ export default {
 </script>
 
 <style scoped>
+
+  #container {
+    position: relative;
+  }
+
   /* loader background */
   #loader {
     background-color: var(--background);
     width: 100%;
     height: 100%;
-    position: fixed;
+    position: absolute;
     z-index: 1;
     transition: .6s;
   }
@@ -206,17 +211,14 @@ export default {
   }
   /* loader sipinner */
   #icon {
-    margin: 30vh auto;
-  }
-
-  @media (min-aspect-ratio: 1/2) {
-    #icon {
-      margin: 30vh 0 0 19.5vh;
-    }
+    position: relative;
+    margin: 0 auto;
+    top: 50%;
+    transform: translateY(-50%);
   }
 
   #spinner {
-    position: absolute;
+    position: fixed;
     top: 18px;
     left: 20px;
   }
