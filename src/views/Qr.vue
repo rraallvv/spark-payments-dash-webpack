@@ -27,7 +27,7 @@
 <script>
 import * as spark from './../assets/js/helpers'
 import axios from 'axios'
-import VueQrcode from '@xkeshi/vue-qrcode'
+import VueQrcode from '@chenfengyuan/vue-qrcode'
 import router from '../router'
 import { HalfCircleSpinner, HollowDotsSpinner } from 'epic-spinners'
 import translations from './../assets/lang.json'

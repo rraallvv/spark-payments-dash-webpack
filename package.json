@@ -13,8 +13,8 @@
     "clean": "rm -rf dist && rm -rf mobile/www"
   },
   "dependencies": {
+    "@chenfengyuan/vue-qrcode": "^1.0.2",
     "@nimiq/hub-api": "^1.2.3",
-    "@xkeshi/vue-qrcode": "^1.0.0",
     "axios": "^0.18.0",
     "bitcoinjs-lib": "^4.0.1",
     "cordova-android": "^7.1.1",
