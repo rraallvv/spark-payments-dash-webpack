@@ -9,7 +9,7 @@
     <div>
       <span>{{ amount }}</span>
       <p id="price">~ {{ unitPrice }}</p>
-      <qrcode v-show="qr" @click.native="test()" :value="uri" :options="{ size: 256, backgroundAlpha: 0, foregroundAlpha: 0.8, level: 'H', padding: 15 }" :tag="'img'"></qrcode>
+      <qrcode v-show="qr" @click.native="test()" :value="uri" :options="{ color: { light: '#00000000' } }" :tag="'img'"></qrcode>
       <div v-show="!qr" id="cointext" @click="test()">
         <div id="content">
           <img id="cointext-logo" src='../assets/img/nimiqtext.png'>
