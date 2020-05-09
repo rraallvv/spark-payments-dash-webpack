@@ -1,5 +1,6 @@
 <template>
 <div id="app">
+  <!--<br> Window height: {{ windowHeight }} <br/>-->
   <span v-if='this.$route.path === "/"' @click="settings()" id="menu"><div class="hamburger" /></span>
   <span v-if='this.$route.path === "/settings" && isStored()' @click="cancel()" id="menu"><div class="close" /></span>
   <img class='logo' src='./assets/img/logo.png'>
@@ -23,7 +24,8 @@ export default {
   data () {
     return {
       connected: null,
-      language: ''
+      language: '',
+      windowHeight: window.innerHeight
     }
   },
 
@@ -88,8 +90,11 @@ export default {
     if (this.connected === false) {
       router.push('/connection')
     }
-  }
 
+    window.addEventListener('resize', () => {
+      this.windowHeight = window.innerHeight
+    })
+  }
 }
 </script>
 
