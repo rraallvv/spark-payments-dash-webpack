@@ -327,7 +327,7 @@ export default {
 
   #address {
     padding-right: 18%;
-    width: 65%
+    width: 63.5%
   }
 
   #scan {
@@ -358,7 +358,7 @@ export default {
 
   #password {
     padding-right: 18%;
-    width: 65%
+    width: 63.5%
   }
 
   #show-password {
@@ -389,9 +389,9 @@ export default {
   /* address input */
   input {
     margin: 2%;
-    background: var(--background);
+    background: var(--light);
     width: 80%;
-    border: 1px solid #d5d5d5;
+    border: 1px solid var(--info);
     border-radius: 0.4em;
     font-size: 1.5em;
     padding: 0.4em;
@@ -406,6 +406,7 @@ export default {
     background: var(--light);
     margin: 0.4em;
     border-radius: 0.2em;
+    border: 1px solid var(--info);
   }
   /* save button */
   button {

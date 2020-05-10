@@ -91,6 +91,11 @@ export default {
       router.push('/connection')
     }
 
+    console.log('!!!', window.innerHeight)
+
+    var viewportMeta = document.getElementById('viewport-meta')
+    viewportMeta.setAttribute('content', `height=${window.innerHeight}`)
+
     window.addEventListener('resize', () => {
       this.windowHeight = window.innerHeight
     })
@@ -150,17 +155,6 @@ export default {
   src: url('./assets/fonts/barlow.ttf');
 } */
 
-@media (min-aspect-ratio: 1/2) {
-  #app {
-    width: 50vh;
-    margin: auto;
-  }
-
-  body {
-    font-size: 2.25vh !important;
-  }
-}
-
 :root {
   --primary: #0087E8;
   --secondary: #6B6570;
@@ -184,6 +178,20 @@ body {
   width: 100%;
   margin: 0 auto;
   font-size: 4.5vw;
+}
+
+#app {
+  margin: auto;
+}
+
+@media (min-aspect-ratio: 1/2) {
+  #app {
+    width: 50vh;
+  }
+
+  body {
+    font-size: 2.25vh;
+  }
 }
 
 img {
