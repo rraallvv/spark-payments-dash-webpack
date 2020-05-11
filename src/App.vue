@@ -26,7 +26,8 @@ export default {
       language: '',
       isMobile: false,
       windowHeight: window.innerHeight,
-      windowWidth: window.innerWidth
+      windowWidth: window.innerWidth,
+      isSoftKeyboardVisible: false
     }
   },
 
@@ -134,9 +135,15 @@ export default {
     window.addEventListener('resize', () => {
       if (this.isMobile) {
         if (this.windowWidth !== window.innerWidth) {
-          // reload the page on screen orientation changes to force
-          // updating the values of windowWidth and windowHeight
-          window.location.reload()
+          this.resize()
+          if (this.isSoftKeyboardVisible) {
+            // TODO: find a better way to update windowWidth and windowHeight
+            // instead of reloading the page on screen orientation changes
+            // when the soft keyboard is visible
+            window.location.reload()
+          }
+        } else {
+          this.isSoftKeyboardVisible = this.windowHeight !== window.innerHeight
         }
       } else {
         this.resize()
