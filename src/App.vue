@@ -74,22 +74,17 @@ export default {
     },
 
     resize: function () {
-      if (this.isMobile && this.windowWidth !== window.innerWidth) {
-        // reload the page on screen orientation changes to force
-        // updating the values of windowWidth and windowHeight
-        window.location.reload()
+      this.windowHeight = window.innerHeight
+      this.windowWidth = window.innerWidth
+      if (this.windowHeight / this.windowWidth < 2) {
+        document.getElementById('app').style.width = (0.5 * this.windowHeight) + 'px'
+        document.body.style.fontSize = (0.0225 * this.windowHeight) + 'px'
       } else {
-        // dynamically adjust the app size
-        if (this.windowHeight / this.windowWidth < 2) {
-          document.getElementById('app').style.width = (0.5 * this.windowHeight) + 'px'
-          document.body.style.fontSize = (0.0225 * this.windowHeight) + 'px'
-        } else {
-          document.getElementById('app').style.width = '100%'
-          document.body.style.fontSize = (0.045 * this.windowWidth) + 'px'
-        }
-        document.body.style.height = this.windowHeight + 'px'
-        document.body.style.width = this.windowWidth + 'px'
+        document.getElementById('app').style.width = '100%'
+        document.body.style.fontSize = (0.045 * this.windowWidth) + 'px'
       }
+      document.body.style.height = this.windowHeight + 'px'
+      document.body.style.width = this.windowWidth + 'px'
     }
 
   },
@@ -137,7 +132,15 @@ export default {
     this.resize()
 
     window.addEventListener('resize', () => {
-      this.resize()
+      if (this.isMobile) {
+        if (this.windowWidth !== window.innerWidth) {
+          // reload the page on screen orientation changes to force
+          // updating the values of windowWidth and windowHeight
+          window.location.reload()
+        }
+      } else {
+        this.resize()
+      }
     })
   }
 }
