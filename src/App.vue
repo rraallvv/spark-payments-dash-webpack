@@ -1,6 +1,5 @@
 <template>
 <div id="app">
-  <!--<br> Window height: {{ windowHeight }} <br/>-->
   <span v-if='this.$route.path === "/"' @click="settings()" id="menu"><div class="hamburger" /></span>
   <span v-if='this.$route.path === "/settings" && isStored()' @click="cancel()" id="menu"><div class="close" /></span>
   <img class='logo' src='./assets/img/logo.png'>
@@ -25,7 +24,9 @@ export default {
     return {
       connected: null,
       language: '',
-      windowHeight: window.innerHeight
+      isMobile: false,
+      windowHeight: window.innerHeight,
+      windowWidth: window.innerWidth
     }
   },
 
@@ -70,6 +71,25 @@ export default {
           console.log(error)
         })
       }
+    },
+
+    resize: function () {
+      if (this.isMobile && this.windowWidth !== window.innerWidth) {
+        // reload the page on screen orientation changes to force
+        // updating the values of windowWidth and windowHeight
+        window.location.reload()
+      } else {
+        // dynamically adjust the app size
+        if (this.windowHeight / this.windowWidth < 2) {
+          document.getElementById('app').style.width = (0.5 * this.windowHeight) + 'px'
+          document.body.style.fontSize = (0.0225 * this.windowHeight) + 'px'
+        } else {
+          document.getElementById('app').style.width = '100%'
+          document.body.style.fontSize = (0.045 * this.windowWidth) + 'px'
+        }
+        document.body.style.height = this.windowHeight + 'px'
+        document.body.style.width = this.windowWidth + 'px'
+      }
     }
 
   },
@@ -81,6 +101,29 @@ export default {
       localStorage.setItem('language', lang)
       this.$root.$data.settings.language = lang
     }
+
+    // detect mobile platform
+    var hasTouchScreen = false
+    if ('maxTouchPoints' in navigator) {
+      hasTouchScreen = navigator.maxTouchPoints > 0
+    } else if ('msMaxTouchPoints' in navigator) {
+      hasTouchScreen = navigator.msMaxTouchPoints > 0
+    } else {
+      var mQ = window.matchMedia && matchMedia('(pointer:coarse)')
+      if (mQ && mQ.media === '(pointer:coarse)') {
+        hasTouchScreen = !!mQ.matches
+      } else if ('orientation' in window) {
+        hasTouchScreen = true // deprecated, but good fallback
+      } else {
+        // Only as a last resort, fall back to user agent sniffing
+        var UA = navigator.userAgent
+        hasTouchScreen = (
+          /\b(BlackBerry|webOS|iPhone|IEMobile)\b/i.test(UA) ||
+          /\b(Android|Windows Phone|iPad|iPod)\b/i.test(UA)
+        )
+      }
+    }
+    this.isMobile = hasTouchScreen
   },
 
   mounted () {
@@ -91,13 +134,10 @@ export default {
       router.push('/connection')
     }
 
-    console.log('!!!', window.innerHeight)
-
-    var viewportMeta = document.getElementById('viewport-meta')
-    viewportMeta.setAttribute('content', `height=${window.innerHeight}`)
+    this.resize()
 
     window.addEventListener('resize', () => {
-      this.windowHeight = window.innerHeight
+      this.resize()
     })
   }
 }
@@ -177,21 +217,10 @@ body {
   padding: 0;
   width: 100%;
   margin: 0 auto;
-  font-size: 4.5vw;
 }
 
 #app {
   margin: auto;
-}
-
-@media (min-aspect-ratio: 1/2) {
-  #app {
-    width: 50vh;
-  }
-
-  body {
-    font-size: 2.25vh;
-  }
 }
 
 img {
