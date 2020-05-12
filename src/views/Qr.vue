@@ -33,6 +33,7 @@ import VueQrcode from '@chenfengyuan/vue-qrcode'
 import router from '../router'
 import { HalfCircleSpinner, HollowDotsSpinner } from 'epic-spinners'
 import translations from './../assets/lang.json'
+import swal from 'sweetalert'
 
 export default {
   name: 'Qr',
@@ -141,13 +142,24 @@ export default {
   },
 
   async created () {
+    this.language = translations[this.$root.$data.settings.language]
     // listen for transaction
     this.$socket.emit('subscribe', 'inv')
     console.log('listening')
     // set the amount
     this.amount = this.$route.params.amount
     // get current price
-    this.price.nimiq = `${(parseFloat(this.amount) / parseFloat(await spark.getExchangeRate(this.amount.split(' ')[1]))).toFixed(5)} NIMIQ`
+    let attempts = 3
+    let result = 0
+    do {
+      result = parseFloat(await spark.getExchangeRate(this.amount.split(' ')[1]))
+    } while (isNaN(result) && --attempts > 0)
+    if (attempts === 0) {
+      swal('Error!', this.language.errors.rate, 'error')
+      router.push('/')
+      return
+    }
+    this.price.nimiq = `${(parseFloat(this.amount) / parseFloat(result)).toFixed(5)} NIMIQ`
     // set pice in luna
     this.price.luna = `${(parseFloat(this.price.nimiq) * 100000).toFixed(0)} LUNA`
     // get address
@@ -183,10 +195,6 @@ export default {
     // loading is done
     this.loading = false
     this.loaderClasses = 'fade-out'
-  },
-
-  mounted () {
-    this.language = translations[this.$root.$data.settings.language]
   }
 
 }

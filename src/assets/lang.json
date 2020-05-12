@@ -24,7 +24,8 @@
       "password": "Please enter a password.\n(must be at least 8 characters)",
       "create": "create a password",
       "reset": "reset your password?",
-      "price": "Price cannot be blank. Please enter an amount."
+      "price": "Price cannot be blank. Please enter an amount.",
+      "rate": "Couldn't get current price rate. Please tray again later."
     }
   },
 
@@ -53,7 +54,8 @@
       "password": "Please enter a password.\n(must be at least 8 characters)",
       "create": "create a password",
       "reset": "reset your password?",
-      "price": "Price cannot be blank. Please enter an amount."
+      "price": "Price cannot be blank. Please enter an amount.",
+      "rate": "Couldn't get current price rate. Please tray again later."
     }
   },
 
@@ -82,7 +84,8 @@
       "password": "Please enter a password.\n(must be at least 8 characters)",
       "create": "create a password",
       "reset": "reset your password?",
-      "price": "Price cannot be blank. Please enter an amount."
+      "price": "Price cannot be blank. Please enter an amount.",
+      "rate": "Couldn't get current price rate. Please tray again later."
     }
   },
 
@@ -111,7 +114,8 @@
       "password": "Favor ingresar una clave.\n(debe ser al menos 8 caracteres)",
       "create": "crear una clave",
       "reset": "restablecer tu clave?",
-      "price": "El precio no puede estar en blanco. Favor ingresar una cantidad."
+      "price": "El precio no puede estar en blanco. Favor ingresar una cantidad.",
+      "rate": "Couldn't get current price rate. Please tray again later."
     }
   },
 
@@ -140,7 +144,8 @@
       "password": "Please enter a password.\n(must be at least 8 characters)",
       "create": "create a password",
       "reset": "reset your password?",
-      "price": "Price cannot be blank. Please enter an amount."
+      "price": "Price cannot be blank. Please enter an amount.",
+      "rate": "Couldn't get current price rate. Please tray again later."
     }
   },
 
@@ -169,7 +174,8 @@
       "password": "Please enter a password.\n(must be at least 8 characters)",
       "create": "create a password",
       "reset": "reset your password?",
-      "price": "Price cannot be blank. Please enter an amount."
+      "price": "Price cannot be blank. Please enter an amount.",
+      "rate": "Couldn't get current price rate. Please tray again later."
     }
   },
 
@@ -198,9 +204,10 @@
         "password": "Please enter a password.\n(must be at least 8 characters)",
         "create": "create a password",
         "reset": "reset your password?",
-        "price": "Price cannot be blank. Please enter an amount."
-      }
-    },
+        "price": "Price cannot be blank. Please enter an amount.",
+        "rate": "Couldn't get current price rate. Please tray again later."
+    }
+  },
 
   "pl": {
     "connected": "podłączony",
@@ -227,38 +234,40 @@
       "password": "Please enter a password.\n(must be at least 8 characters)",
       "create": "create a password",
       "reset": "reset your password?",
-      "price": "Price cannot be blank. Please enter an amount."
+      "price": "Price cannot be blank. Please enter an amount.",
+      "rate": "Couldn't get current price rate. Please tray again later."
     }
   },
 
   "pt-br": {
-      "connected": "desconectado",
-      "internet": "por favor verifique internet",
-      "address": "endereço nimiq",
-      "password": "password",
-      "language": "idioma",
-      "currency": "moeda local",
-      "format": "formato nimiq padrão",
-      "save": "salvar",
-      "charge": "solicitar pagamento",
-      "partial": "recebido",
-      "waiting": "aguardando pagamento..",
-      "cancel": "cancelar",
-      "payment_received": "Pagamento recebido!",
-      "thanks": "Obrigado!",
-      "done": "concluído",
-      "pay": "pay",
-      "errors": {
-        "enter": "Please enter your password",
-        "wrong": "Password is incorrect",
-        "address": "Please enter a valid Nimiq address.",
-        "warning": "This is a testnet address, please make sure you are using a testnet build!",
-        "password": "Please enter a password.\n(must be at least 8 characters)",
-        "create": "create a password",
-        "reset": "reset your password?",
-        "price": "Price cannot be blank. Please enter an amount."
-      }
-    },
+    "connected": "desconectado",
+    "internet": "por favor verifique internet",
+    "address": "endereço nimiq",
+    "password": "password",
+    "language": "idioma",
+    "currency": "moeda local",
+    "format": "formato nimiq padrão",
+    "save": "salvar",
+    "charge": "solicitar pagamento",
+    "partial": "recebido",
+    "waiting": "aguardando pagamento..",
+    "cancel": "cancelar",
+    "payment_received": "Pagamento recebido!",
+    "thanks": "Obrigado!",
+    "done": "concluído",
+    "pay": "pay",
+    "errors": {
+      "enter": "Please enter your password",
+      "wrong": "Password is incorrect",
+      "address": "Please enter a valid Nimiq address.",
+      "warning": "This is a testnet address, please make sure you are using a testnet build!",
+      "password": "Please enter a password.\n(must be at least 8 characters)",
+      "create": "create a password",
+      "reset": "reset your password?",
+      "price": "Price cannot be blank. Please enter an amount.",
+      "rate": "Couldn't get current price rate. Please tray again later."
+    }
+  },
 
   "sk": {
     "connected": "nepripojené",
@@ -285,7 +294,8 @@
       "password": "Please enter a password.\n(must be at least 8 characters)",
       "create": "create a password",
       "reset": "reset your password?",
-      "price": "Price cannot be blank. Please enter an amount."
+      "price": "Price cannot be blank. Please enter an amount.",
+      "rate": "Couldn't get current price rate. Please tray again later."
     }
   },
 
@@ -293,6 +303,7 @@
     "connected": "連接 ",
     "internet": "互連網 ",
     "address": "Nimiq 地址 ",
+    "password": "password",
     "language": "語言 ",
     "currency": "貨幣 ",
     "format": "格式 ",
@@ -313,7 +324,8 @@
       "password": "Please enter a password.\n(must be at least 8 characters)",
       "create": "create a password",
       "reset": "reset your password?",
-      "price": "Price cannot be blank. Please enter an amount."
+      "price": "Price cannot be blank. Please enter an amount.",
+      "rate": "Couldn't get current price rate. Please tray again later."
     }
   }
 }
