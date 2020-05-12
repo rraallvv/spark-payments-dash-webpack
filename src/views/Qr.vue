@@ -74,7 +74,7 @@ export default {
       // return home
       router.go(-1)
       // unsubscribe from tx events
-      this.$socket.emit('unsubscribe', 'inv')
+      this.$socket.emit('unsubscribe', this.address.replace(/ /g, ''))
       console.log('not listening')
     }
   },
@@ -143,8 +143,10 @@ export default {
 
   async created () {
     this.language = translations[this.$root.$data.settings.language]
+    // get address
+    this.address = this.$route.query.address || await spark.getAddress(this.$root.$data.settings.account)
     // listen for transaction
-    this.$socket.emit('subscribe', 'inv')
+    this.$socket.emit('subscribe', this.address.replace(/ /g, ''))
     console.log('listening')
     // set the amount
     this.amount = this.$route.params.amount
@@ -162,8 +164,6 @@ export default {
     this.price.nimiq = `${(parseFloat(this.amount) / parseFloat(result)).toFixed(5)} NIMIQ`
     // set pice in luna
     this.price.luna = `${(parseFloat(this.price.nimiq) * 100000).toFixed(0)} LUNA`
-    // get address
-    this.address = this.$route.query.address || await spark.getAddress(this.$root.$data.settings.account)
     // set uri for qr code
     // safeUrl/#_request/NQAABBBBCCCCDDDDEEEEFFFFGGGGHHHHIIII/123.12345_
     this.uri = `${this.$safeUrl}/#_request/${this.address.replace(/ /g, '')}/${parseFloat(this.price.nimiq)}_`
@@ -179,7 +179,7 @@ export default {
     // })
     // set url for cointext or nimiqtext
     // let url = `https://api.nimizuela.org/invoice?addr=${this.address}&amount=${duffs}`
-    let url = `https://api.nimizuela.org/nimiqtext?addr=${this.address}&amount=${duffs}`
+    let url = `https://api.nimizuela.org/nimiqtext?addr=${this.address.replace(/ /g, '')}&amount=${duffs}`
     // get invoice number from cointext
     console.log(url)
     let vm = this

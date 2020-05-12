@@ -17,6 +17,7 @@
 <script>
 import router from '../router'
 import translations from './../assets/lang.json'
+import * as spark from './../assets/js/helpers'
 
 export default {
   name: 'Confirmed',
@@ -24,7 +25,8 @@ export default {
   data () {
     return {
       locked: '0',
-      language: ''
+      language: '',
+      address: ''
     }
   },
 
@@ -45,11 +47,13 @@ export default {
     }
   },
 
-  created () {
+  async created () {
     // set the status
     this.locked = this.$route.params.status
+    // get address
+    this.address = this.$route.query.address || await spark.getAddress(this.$root.$data.settings.account)
     // stop listening for tx events
-    this.$socket.emit('unsubscribe', 'inv')
+    this.$socket.emit('unsubscribe', this.address.replace(/ /g, ''))
     console.log('not listening')
     // update xpub index on successful tx
     let index = localStorage.getItem('index')
