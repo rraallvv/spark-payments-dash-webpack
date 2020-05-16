@@ -53,6 +53,11 @@ const router = new Router({
               }
             }
           })
+          // if canceled - show user
+          if (pw === null) {
+            next('/')
+            return
+          }
           pw = bitcoin.crypto.sha256(pw).join('')
           // if password matches, show settings
           if (pw === localStorage.getItem('password')) {
